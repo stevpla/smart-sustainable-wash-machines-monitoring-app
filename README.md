@@ -73,13 +73,17 @@ karma test
 
 
 ## People
-- Nikos Rekkas and Stefanos Plastras were designed, implemented and offered this project to the university.
+- Nikos Rekkas, Vasilis Kartitzoglou and Stefanos Plastras, all students and alumni from University of the Aegean were involved in the design, implementaion, testing and installation of this project.
 
 ### Nikos Rekkas
-Currently, he is working as engineer in TECH COMPANY. He holds a MEng from Dept. of Information and Communication Systems Engineering. His email is: nikos.rekkas@gmail.com
+- Currently, he is working as software engineer in ABS COMPANY. He holds MEng from Department of Information and Communication Systems Engineering from University of the Aegean.  
+Email: nikos.rekkas@gmail.com  
+Github: [nikosrk](https://github.com/nikosrk)  
 
 ### Stefanos Plastras
-Currently, he is doing his PhD studies in networks. He holds a MEng from Dept. of Information and Communication Systems Engineering and a MSc from Athens University of Economics & Business. His email is: s.plastras@gmail.com
+- Currently, he is doing his PhD studies in networks. He holds a MEng from Dept. of Information and Communication Systems Engineering and a MSc from Athens University of Economics & Business.  
+Email: s.plastras@gmail.com   
+Github: [stevpla](https://github.com/stevpla)
 
 
 ## License
