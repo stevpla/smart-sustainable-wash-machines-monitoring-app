@@ -4,18 +4,11 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>OnePage Bootstrap Template - Index</title>
+  <title>Wash Monitoring Service</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
-
-  <!-- Favicons -->
-  <link href="/img/favicon.png" rel="icon">
-  <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
-
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
   <!-- Vendor CSS Files -->
   <link href="/vendor/aos/aos.css" rel="stylesheet">
   <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -24,25 +17,39 @@
   <link href="/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
   <!-- Template Main CSS File -->
   <link href="/css/style.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: OnePage - v4.10.0
-  * Template URL: https://bootstrapmade.com/onepage-multipurpose-bootstrap-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
-</head>
+  <style>
+    .label-frame {
+  background-color: green;
+  padding: 9px;
+  border-radius: 10px;
+  display: inline-block;
+      margin-left: 9px; /* Adjust the margin as needed */
+}
 
+.wash-message-label {
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 26px; /* Adjust the font size as needed */
+}
+
+.timer {
+  font-size: 38px;
+  color: blue;
+}
+  </style>
+
+</head>
 <body>
 
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
 
-      <h1 class="logo"><img src="https://yt3.googleusercontent.com/ytc/AL5GRJWQ9gCPePo1VwyRezvmWW1Urn1joHPYPETlcfZE=s900-c-k-c0x00ffffff-no-rj" style="width:50px;"><a href="index.html">University of the Aegean</a></h1>
+      <h1 class="logo"><img src="img/logo.jpg" style="width:50px;"><a href="index.html">University of the Aegean</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -73,18 +80,26 @@
         <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="200">
           <div class="icon-box">
             <div class=""><i class="ri-stack-line"></i></div>
-             <img src="https://cdn-icons-png.flaticon.com/512/683/683138.png" alt="Wash 1" style="width:200px;height:200px;">
-            <!--  <h4 class="title"><a href="">Lorem Ipsum</a></h4> -->
+             <img src="img/wash_icon.png" alt="Wash 1" style="width:200px;height:200px;">
+             <img src="img/wash_circle.png" class="inner-icon"  style="position: absolute; top: 126px; right: 83px; width:95px; height:95px; animation: spin 4s infinite linear;">
             <p class="description"><br>Πλυντήριο Νο. 1</p>
+            <div id="LabelFrame1" class="label-frame">
+              <label class="wash-message-label">FREE</label>
+            </div>
+              <div id="timer1" class="timer" style="display: none;"></div>
           </div>
         </div>
 
         <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="200">
           <div class="icon-box">
             <div class=""><i class="ri-stack-line"></i></div>
-             <img src="https://cdn-icons-png.flaticon.com/512/683/683138.png" alt="Wash 1" style="width:200px;height:200px;">
-            <!--  <h4 class="title"><a href="">Lorem Ipsum</a></h4> -->
+             <img src="img/wash_icon.png" alt="Wash 1" style="width:200px;height:200px;">
+             <img src="img/wash_circle.png" class="inner-icon"  style="position: absolute; top: 126px; right: 83px; width:95px; height:95px; animation: spin 4s infinite linear;">
             <p class="description"><br>Πλυντήριο Νο. 2</p>
+            <div id="LabelFrame2" class="label-frame">
+              <label class="wash-message-label">FREE</label>
+            </div>
+            <div id="timer2" class="timer" style="display: none;"></div>
           </div>
         </div>
 
@@ -97,15 +112,12 @@
             <p class="description"><br><b><p style="color:red;">OUT OF SERVICE..</b></p></p>
           </div>
         </div>
-
       </div>
     </div>
+
+
   </section><!-- End Hero -->
-
   <main id="main">
-
-
-
     <!-- ======= Frequently Asked Questions Section ======= -->
     <section id="faq" class="faq section-bg">
       <div class="container" data-aos="fade-up">
@@ -127,37 +139,37 @@
             </li>
 
             <li data-aos="fade-up" data-aos-delay="100">
-              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-2" class="collapsed">Feugiat scelerisque varius morbi enim nunc? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-2" class="collapsed">Y1? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
               <div id="faq-list-2" class="collapse" data-bs-parent=".faq-list">
                 <p>
-                  Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
+                  X1.
                 </p>
               </div>
             </li>
 
             <li data-aos="fade-up" data-aos-delay="200">
-              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-3" class="collapsed">Dolor sit amet consectetur adipiscing elit? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-3" class="collapsed">Y2? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
               <div id="faq-list-3" class="collapse" data-bs-parent=".faq-list">
                 <p>
-                  Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis
+                  X2
                 </p>
               </div>
             </li>
 
             <li data-aos="fade-up" data-aos-delay="300">
-              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-4" class="collapsed">Tempus quam pellentesque nec nam aliquam sem et tortor consequat? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-4" class="collapsed">Y3? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
               <div id="faq-list-4" class="collapse" data-bs-parent=".faq-list">
                 <p>
-                  Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in.
+                  X3
                 </p>
               </div>
             </li>
 
             <li data-aos="fade-up" data-aos-delay="400">
-              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-5" class="collapsed">Tortor vitae purus faucibus ornare. Varius vel pharetra vel turpis nunc eget lorem dolor? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-5" class="collapsed">Y4 <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
               <div id="faq-list-5" class="collapse" data-bs-parent=".faq-list">
                 <p>
-                  Laoreet sit amet cursus sit amet dictum sit amet justo. Mauris vitae ultricies leo integer malesuada nunc vel. Tincidunt eget nullam non nisi est sit amet. Turpis nunc eget lorem dolor sed. Ut venenatis tellus in metus vulputate eu scelerisque.
+                    X4.
                 </p>
               </div>
             </li>
@@ -270,6 +282,7 @@
   <div id="preloader"></div>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mqtt/3.0.0/mqtt.min.js"></script>
   <!-- Vendor JS Files -->
   <script src="/vendor/purecounter/purecounter_vanilla.js"></script>
   <script src="/vendor/aos/aos.js"></script>
@@ -282,6 +295,200 @@
   <!-- Template Main JS File -->
   <script src="/js/main.js"></script>
 
-</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script>
+  var timerElement = document.getElementById("timer1");
+  var startTime = moment();
 
+  function updateTimer() {
+    var currentTime = moment();
+    var duration = moment.duration(currentTime.diff(startTime));
+    var hours = Math.floor(duration.asHours());
+    var minutes = Math.floor(duration.asMinutes()) % 60;
+    var seconds = Math.floor(duration.asSeconds()) % 60;
+    var formattedTime = hours.toString().padStart(2, '0') + ':' +
+                        minutes.toString().padStart(2, '0') + ':' +
+                        seconds.toString().padStart(2, '0');
+    timerElement.innerText = formattedTime;
+  }
+  setInterval(updateTimer, 1000);
+</script>
+
+<script>
+  var timerElement2 = document.getElementById("timer2");
+  var startTime = moment();
+
+  function updateTimer() {
+    var currentTime = moment();
+    var duration = moment.duration(currentTime.diff(startTime));
+    var hours = Math.floor(duration.asHours());
+    var minutes = Math.floor(duration.asMinutes()) % 60;
+    var seconds = Math.floor(duration.asSeconds()) % 60;
+    var formattedTime = hours.toString().padStart(2, '0') + ':' +
+                        minutes.toString().padStart(2, '0') + ':' +
+                        seconds.toString().padStart(2, '0');
+    timerElement2.innerText = formattedTime;
+  }
+  setInterval(updateTimer, 1000);
+</script>
+
+<script>
+      function calculateTimeDifference(time) {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        const current_time = hours + ':' + minutes + ':' + seconds;
+
+        const date1 = new Date(`2000-01-01T${time}`);
+        const date2 = new Date(`2000-01-01T${current_time}`);
+        // Calculate the difference in milliseconds
+        const diffMilliseconds = Math.abs(date2 - date1);
+        // Convert the difference to hours, minutes, and seconds
+        const diffHours = Math.floor(diffMilliseconds / (1000 * 60 * 60));
+        const diffMinutes = Math.floor((diffMilliseconds % (1000 * 60 * 60)) / (1000 * 60));
+        const diffSeconds = Math.floor((diffMilliseconds % (1000 * 60)) / 1000);
+        // Format the difference values as "hh:mm:ss"
+        return `${String(diffHours).padStart(2, '0')}:${String(diffMinutes).padStart(2, '0')}:${String(diffSeconds).padStart(2, '0')}`;
+      }
+      function getCurrentTime(){
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        return hours + ':' + minutes + ':' + seconds;
+      }
+      //BEFORE JS CLIENT CONNECTS TO BROKER, FIRSTLY CALL CHECK API
+      fetch('/check_status', {
+        method: 'GET'
+      })
+        .then(response => response.json())
+              .then(data => {
+                const state1 = data.state1;
+                const state2 = data.state2;
+                const time1 = data.time1;
+                const time2 = data.time2;
+                if (state1) {
+                  document.getElementById("LabelFrame1").style.display = "none";
+                  flag1 = 1;
+                  document.getElementById("timer1").textContent = calculateTimeDifference(time1);
+                  document.getElementById("timer1").style.display = "block";
+                }
+                if (state2) {
+                  document.getElementById("LabelFrame2").style.display = "none";
+                  flag2 = 1;
+                  document.getElementById("timer2").textContent = calculateTimeDifference(time2);
+                  document.getElementById("timer2").style.display = "block";
+                }
+                console.log('Wash State 1:', state1);
+                console.log('Wash State 2:', state2);
+                console.log('Wash 1 Timestamp:', time1);
+                console.log('Wash 2 Timestamp:', time2);
+              })
+              .catch(error => {
+                console.error('Cannot call Back-end API...');
+              });
+      //===========================================
+      //===========================================
+        // Connect to MQTT broker
+        var client = mqtt.connect('ws://10.10.10.151:9001'); // Replace with your MQTT broker URL
+        // Called when the client is connected
+        client.on('connect', function () {
+            client.subscribe('wash_samos_1/ampere', function (err) {
+            });
+            client.subscribe('wash_samos_2/ampere', function (err) {
+            });
+        });
+
+        let static_counter_complete_wash_1 = 0;
+        let static_counter_complete_wash_1_b = 0
+        let flag1 = 0;
+        let static_counter_complete_wash_2 = 0;
+        let static_counter_complete_wash_2_b = 0
+        let flag2 = 0;
+        function start_wash1_validator(ampere_value) {
+                let val = parseFloat(ampere_value);
+
+                if (val > 0.01 && val < 0.16) {
+                    if (flag1 === 1) {
+                        if (static_counter_complete_wash_1 === 12) {
+                            flag1 = 0;
+                            static_counter_complete_wash_1 = 0;
+                            document.getElementById("timer1").style.display = "none";
+                            document.getElementById("LabelFrame1").style.display = "block";
+                        }else {
+                            static_counter_complete_wash_1 += 1;
+                        }
+                    }
+                }
+                if (0.17 < val && val < 5) {
+                  if (flag1 === 0) {
+                    if (static_counter_complete_wash_1_b === 5) {
+                      flag1 = 1;
+                      static_counter_complete_wash_1_b = 0;
+                      document.getElementById("timer1").textContent = getCurrentTime();
+                      document.getElementById("timer1").style.display = "block";
+                      document.getElementById("LabelFrame1").style.display = "none";
+                    } else {
+                      static_counter_complete_wash_1_b += 1;
+                    }
+                  }
+                }
+                if (val > 1.00) {
+                    if (flag1 === 0) {
+                      flag1 = 1;
+                      document.getElementById("timer1").textContent = getCurrentTime();
+                      document.getElementById("timer1").style.display = "block";
+                      document.getElementById("LabelFrame1").style.display = "none";
+                    }
+                }
+            }
+          function start_wash2_validator(ampere_value) {
+            let val = parseFloat(ampere_value);
+
+                if (val > 0.01 && val < 0.16) {
+                    if (flag2 === 1) {
+                        if (static_counter_complete_wash_2 === 12) {
+                            flag2 = 0;
+                            static_counter_complete_wash_2 = 0;
+                            document.getElementById("timer2").style.display = "none";
+                            document.getElementById("LabelFrame2").style.display = "block";
+
+                        }else {
+                            static_counter_complete_wash_2 += 1;
+                        }
+                    }
+                }
+                if (0.17 < val && val < 5) {
+                  if (flag2 === 0) {
+                    if (static_counter_complete_wash_2_b === 5) {
+                      flag2 = 1;
+                      static_counter_complete_wash_2_b = 0;
+                      document.getElementById("timer2").textContent = getCurrentTime();
+                      document.getElementById("timer2").style.display = "block";
+                      document.getElementById("LabelFrame2").style.display = "none";
+                    } else {
+                      static_counter_complete_wash_2_b += 1;
+                    }
+                  }
+                }
+                if (val > 1.00) {
+                    if (flag2 === 0) {
+                      flag2 = 1;
+                      document.getElementById("timer2").style.display = "block";
+                      document.getElementById("LabelFrame2").style.display = "none";
+                    }
+                }
+            }
+        // Called when a message is received
+        client.on('message', function (topic, message) {
+          if (topic === 'wash_samos_1/ampere') {
+            start_wash1_validator(message.toString());
+          } else if (topic === 'wash_samos_2/ampere') {
+            console.log(topic, ' --> ', message.toString());
+            start_wash2_validator(message.toString());
+          }
+        });
+    </script>
+</body>
 </html>
