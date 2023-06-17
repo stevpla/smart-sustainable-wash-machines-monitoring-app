@@ -296,41 +296,7 @@
   <script src="/js/main.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-<script>
-  var timerElement = document.getElementById("timer1");
-  var startTime = moment();
 
-  function updateTimer() {
-    var currentTime = moment();
-    var duration = moment.duration(currentTime.diff(startTime));
-    var hours = Math.floor(duration.asHours());
-    var minutes = Math.floor(duration.asMinutes()) % 60;
-    var seconds = Math.floor(duration.asSeconds()) % 60;
-    var formattedTime = hours.toString().padStart(2, '0') + ':' +
-                        minutes.toString().padStart(2, '0') + ':' +
-                        seconds.toString().padStart(2, '0');
-    timerElement.innerText = formattedTime;
-  }
-  setInterval(updateTimer, 1000);
-</script>
-
-<script>
-  var timerElement2 = document.getElementById("timer2");
-  var startTime = moment();
-
-  function updateTimer() {
-    var currentTime = moment();
-    var duration = moment.duration(currentTime.diff(startTime));
-    var hours = Math.floor(duration.asHours());
-    var minutes = Math.floor(duration.asMinutes()) % 60;
-    var seconds = Math.floor(duration.asSeconds()) % 60;
-    var formattedTime = hours.toString().padStart(2, '0') + ':' +
-                        minutes.toString().padStart(2, '0') + ':' +
-                        seconds.toString().padStart(2, '0');
-    timerElement2.innerText = formattedTime;
-  }
-  setInterval(updateTimer, 1000);
-</script>
 
 <script>
       function calculateTimeDifference(time) {
@@ -351,12 +317,34 @@
         // Format the difference values as "hh:mm:ss"
         return `${String(diffHours).padStart(2, '0')}:${String(diffMinutes).padStart(2, '0')}:${String(diffSeconds).padStart(2, '0')}`;
       }
-      function getCurrentTime(){
+      function getCurrentTime() {
         const now = new Date();
         const hours = String(now.getHours()).padStart(2, '0');
         const minutes = String(now.getMinutes()).padStart(2, '0');
         const seconds = String(now.getSeconds()).padStart(2, '0');
         return hours + ':' + minutes + ':' + seconds;
+      }
+      function startCountUpTimer(timerElementId, timeDifference) {
+        const timerElement = document.getElementById(timerElementId);
+        //const startTime = Date.now() - timeDifference * 1000; // Convert time difference to milliseconds
+        function updateTimer() {
+          // Convert the time string to a Date object
+          const timeParts = timeDifference.split(":");
+          const dateObj = new Date();
+          dateObj.setHours(parseInt(timeParts[0], 10));
+          dateObj.setMinutes(parseInt(timeParts[1], 10));
+          dateObj.setSeconds(parseInt(timeParts[2], 10));
+          // Increment the time by one second
+          dateObj.setSeconds(dateObj.getSeconds() + 1);
+          // Convert the updated Date object back to the string format
+          const updatedTime = `${String(dateObj.getHours()).padStart(2, '0')}:${String(dateObj.getMinutes()).padStart(2, '0')}:${String(dateObj.getSeconds()).padStart(2, '0')}`;
+          timerElement.textContent = updatedTime;
+          timeDifference = dateObj.toLocaleTimeString([], { hour12: false });
+        }
+        // Update the timer every second
+        const timerInterval = setInterval(updateTimer, 1000);
+        // Clear the interval when needed (e.g., when stopping the timer)
+        // clearInterval(timerInterval);
       }
       //BEFORE JS CLIENT CONNECTS TO BROKER, FIRSTLY CALL CHECK API
       fetch('/check_status', {
@@ -371,19 +359,19 @@
                 if (state1) {
                   document.getElementById("LabelFrame1").style.display = "none";
                   flag1 = 1;
-                  document.getElementById("timer1").textContent = calculateTimeDifference(time1);
+                  timeDifference = calculateTimeDifference(time1);
+                  //document.getElementById("timer1").textContent = timeDifference;
                   document.getElementById("timer1").style.display = "block";
+                  startCountUpTimer("timer1", timeDifference);
                 }
                 if (state2) {
                   document.getElementById("LabelFrame2").style.display = "none";
                   flag2 = 1;
-                  document.getElementById("timer2").textContent = calculateTimeDifference(time2);
+                  timeDifference = calculateTimeDifference(time2);
+                  //document.getElementById("timer2").textContent = timeDifference;
                   document.getElementById("timer2").style.display = "block";
+                  startCountUpTimer("timer2", timeDifference);
                 }
-                console.log('Wash State 1:', state1);
-                console.log('Wash State 2:', state2);
-                console.log('Wash 1 Timestamp:', time1);
-                console.log('Wash 2 Timestamp:', time2);
               })
               .catch(error => {
                 console.error('Cannot call Back-end API...');
@@ -426,9 +414,9 @@
                     if (static_counter_complete_wash_1_b === 5) {
                       flag1 = 1;
                       static_counter_complete_wash_1_b = 0;
-                      document.getElementById("timer1").textContent = getCurrentTime();
-                      document.getElementById("timer1").style.display = "block";
                       document.getElementById("LabelFrame1").style.display = "none";
+                      document.getElementById("timer1").style.display = "block";
+                      startCountUpTimer("timer1", '00:00:00');
                     } else {
                       static_counter_complete_wash_1_b += 1;
                     }
@@ -437,9 +425,9 @@
                 if (val > 1.00) {
                     if (flag1 === 0) {
                       flag1 = 1;
-                      document.getElementById("timer1").textContent = getCurrentTime();
-                      document.getElementById("timer1").style.display = "block";
                       document.getElementById("LabelFrame1").style.display = "none";
+                      document.getElementById("timer1").style.display = "block";
+                      startCountUpTimer("timer1", '00:00:00');
                     }
                 }
             }
@@ -464,9 +452,9 @@
                     if (static_counter_complete_wash_2_b === 5) {
                       flag2 = 1;
                       static_counter_complete_wash_2_b = 0;
-                      document.getElementById("timer2").textContent = getCurrentTime();
-                      document.getElementById("timer2").style.display = "block";
                       document.getElementById("LabelFrame2").style.display = "none";
+                      document.getElementById("timer2").style.display = "block";
+                      startCountUpTimer("timer2", '00:00:00');
                     } else {
                       static_counter_complete_wash_2_b += 1;
                     }
@@ -475,8 +463,9 @@
                 if (val > 1.00) {
                     if (flag2 === 0) {
                       flag2 = 1;
-                      document.getElementById("timer2").style.display = "block";
                       document.getElementById("LabelFrame2").style.display = "none";
+                      document.getElementById("timer2").style.display = "block";
+                      startCountUpTimer("timer2", '00:00:00');
                     }
                 }
             }
@@ -485,7 +474,6 @@
           if (topic === 'wash_samos_1/ampere') {
             start_wash1_validator(message.toString());
           } else if (topic === 'wash_samos_2/ampere') {
-            console.log(topic, ' --> ', message.toString());
             start_wash2_validator(message.toString());
           }
         });

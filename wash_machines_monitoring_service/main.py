@@ -109,6 +109,7 @@ def email_call():
 def check_wash_status():
     global wash_state_1, wash_1_timestamp_state
     global wash_state_2, wash_2_timestamp_state
+    print(wash_2_timestamp_state)
     return jsonify(state1=wash_state_1, state2=wash_state_2, time1=wash_1_timestamp_state, time2=wash_2_timestamp_state)
 
 
@@ -119,4 +120,4 @@ def init():
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80)
+    app.run(host='0.0.0.0', port=80, debug=True)
