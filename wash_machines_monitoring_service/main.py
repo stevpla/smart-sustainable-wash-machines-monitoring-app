@@ -48,7 +48,7 @@ def handle_mqtt_message(client, userdata, message):
     val = float(payload)
 
     if topic == 'wash_samos_1/ampere':
-        if 0.16 > val > 0.01:
+        if 0.16 >= val > 0.01:
             if flag1 == 1:
                 if static_counter_complete_wash_1 == 12:
                     flag1 = 0
@@ -56,7 +56,7 @@ def handle_mqtt_message(client, userdata, message):
                     wash_state_1 = False
                 else:
                     static_counter_complete_wash_1 = static_counter_complete_wash_1 + 1
-        if 0.17 < val < 5:
+        if val >= 0.17:
             if flag1 == 0:
                 if static_counter_complete_wash_1_b == 5:
                     flag1 = 1
@@ -65,13 +65,8 @@ def handle_mqtt_message(client, userdata, message):
                     wash_1_timestamp_state = datetime.now().strftime("%H:%M:%S")
                 else:
                     static_counter_complete_wash_1_b = static_counter_complete_wash_1_b + 1
-        if val > 1.00:
-            if flag1 == 0:
-                flag1 = 1
-                wash_state_1 = True
-                wash_1_timestamp_state = datetime.now().strftime("%H:%M:%S")
     elif topic == 'wash_samos_2/ampere':
-        if 0.16 > val > 0.01:
+        if 0.16 >= val > 0.01:
             if flag2 == 1:
                 if static_counter_complete_wash_2 == 12:
                     flag2 = 0
@@ -79,7 +74,7 @@ def handle_mqtt_message(client, userdata, message):
                     wash_state_2 = False
                 else:
                     static_counter_complete_wash_2 = static_counter_complete_wash_2 + 1
-        if 0.17 < val < 5:
+        if val >= 0.17:
             if flag2 == 0:
                 if static_counter_complete_wash_2_b == 5:
                     flag2 = 1
@@ -88,11 +83,6 @@ def handle_mqtt_message(client, userdata, message):
                     wash_2_timestamp_state = datetime.now().strftime("%H:%M:%S")
                 else:
                     static_counter_complete_wash_2_b = static_counter_complete_wash_2_b + 1
-        if val > 1.00:
-            if flag2 == 0:
-                flag2 = 1
-                wash_state_2 = True
-                wash_2_timestamp_state = datetime.now().strftime("%H:%M:%S")
 
 
 @app.route('/email_action', methods=["GET", "POST"])
@@ -109,7 +99,6 @@ def email_call():
 def check_wash_status():
     global wash_state_1, wash_1_timestamp_state
     global wash_state_2, wash_2_timestamp_state
-    print(wash_2_timestamp_state)
     return jsonify(state1=wash_state_1, state2=wash_state_2, time1=wash_1_timestamp_state, time2=wash_2_timestamp_state)
 
 

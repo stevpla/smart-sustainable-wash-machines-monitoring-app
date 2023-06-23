@@ -324,8 +324,9 @@
         const seconds = String(now.getSeconds()).padStart(2, '0');
         return hours + ':' + minutes + ':' + seconds;
       }
-      function startCountUpTimer(timerElementId, timeDifference) {
-        const timerElement = document.getElementById(timerElementId);
+      function startCountUpTimer1(timeDifference) {
+        let timerInterval;
+        const timerElement = document.getElementById('timer1');
         //const startTime = Date.now() - timeDifference * 1000; // Convert time difference to milliseconds
         function updateTimer() {
           // Convert the time string to a Date object
@@ -340,9 +341,42 @@
           const updatedTime = `${String(dateObj.getHours()).padStart(2, '0')}:${String(dateObj.getMinutes()).padStart(2, '0')}:${String(dateObj.getSeconds()).padStart(2, '0')}`;
           timerElement.textContent = updatedTime;
           timeDifference = dateObj.toLocaleTimeString([], { hour12: false });
+
+          if (flag1 === 0) {
+            // Clear the interval to stop the timer
+            clearInterval(timerInterval);
+          }
         }
         // Update the timer every second
-        const timerInterval = setInterval(updateTimer, 1000);
+        timerInterval = setInterval(updateTimer, 1000);
+        // Clear the interval when needed (e.g., when stopping the timer)
+        // clearInterval(timerInterval);
+      }
+      function startCountUpTimer2(timeDifference) {
+        let timerInterval;
+        const timerElement = document.getElementById('timer2');
+        //const startTime = Date.now() - timeDifference * 1000; // Convert time difference to milliseconds
+        function updateTimer() {
+          // Convert the time string to a Date object
+          const timeParts = timeDifference.split(":");
+          const dateObj = new Date();
+          dateObj.setHours(parseInt(timeParts[0], 10));
+          dateObj.setMinutes(parseInt(timeParts[1], 10));
+          dateObj.setSeconds(parseInt(timeParts[2], 10));
+          // Increment the time by one second
+          dateObj.setSeconds(dateObj.getSeconds() + 1);
+          // Convert the updated Date object back to the string format
+          const updatedTime = `${String(dateObj.getHours()).padStart(2, '0')}:${String(dateObj.getMinutes()).padStart(2, '0')}:${String(dateObj.getSeconds()).padStart(2, '0')}`;
+          timerElement.textContent = updatedTime;
+          timeDifference = dateObj.toLocaleTimeString([], { hour12: false });
+
+          if (flag2 === 0) {
+            // Clear the interval to stop the timer
+            clearInterval(timerInterval);
+          }
+        }
+        // Update the timer every second
+        timerInterval = setInterval(updateTimer, 1000);
         // Clear the interval when needed (e.g., when stopping the timer)
         // clearInterval(timerInterval);
       }
@@ -397,7 +431,7 @@
         function start_wash1_validator(ampere_value) {
                 let val = parseFloat(ampere_value);
 
-                if (val > 0.01 && val < 0.16) {
+                if (val > 0.01 && val <= 0.16) {
                     if (flag1 === 1) {
                         if (static_counter_complete_wash_1 === 12) {
                             flag1 = 0;
@@ -409,32 +443,24 @@
                         }
                     }
                 }
-                if (0.17 < val && val < 5) {
+                if (val >= 0.17) {
                   if (flag1 === 0) {
                     if (static_counter_complete_wash_1_b === 5) {
                       flag1 = 1;
                       static_counter_complete_wash_1_b = 0;
                       document.getElementById("LabelFrame1").style.display = "none";
                       document.getElementById("timer1").style.display = "block";
-                      startCountUpTimer("timer1", '00:00:00');
+                      startCountUpTimer1('00:00:00');
                     } else {
                       static_counter_complete_wash_1_b += 1;
                     }
                   }
                 }
-                if (val > 1.00) {
-                    if (flag1 === 0) {
-                      flag1 = 1;
-                      document.getElementById("LabelFrame1").style.display = "none";
-                      document.getElementById("timer1").style.display = "block";
-                      startCountUpTimer("timer1", '00:00:00');
-                    }
-                }
             }
           function start_wash2_validator(ampere_value) {
             let val = parseFloat(ampere_value);
 
-                if (val > 0.01 && val < 0.16) {
+                if (val > 0.01 && val <= 0.16) {
                     if (flag2 === 1) {
                         if (static_counter_complete_wash_2 === 12) {
                             flag2 = 0;
@@ -447,26 +473,18 @@
                         }
                     }
                 }
-                if (0.17 < val && val < 5) {
+                if (val >= 0.17) {
                   if (flag2 === 0) {
                     if (static_counter_complete_wash_2_b === 5) {
                       flag2 = 1;
                       static_counter_complete_wash_2_b = 0;
                       document.getElementById("LabelFrame2").style.display = "none";
                       document.getElementById("timer2").style.display = "block";
-                      startCountUpTimer("timer2", '00:00:00');
+                      startCountUpTimer2('00:00:00');
                     } else {
                       static_counter_complete_wash_2_b += 1;
                     }
                   }
-                }
-                if (val > 1.00) {
-                    if (flag2 === 0) {
-                      flag2 = 1;
-                      document.getElementById("LabelFrame2").style.display = "none";
-                      document.getElementById("timer2").style.display = "block";
-                      startCountUpTimer("timer2", '00:00:00');
-                    }
                 }
             }
         // Called when a message is received
