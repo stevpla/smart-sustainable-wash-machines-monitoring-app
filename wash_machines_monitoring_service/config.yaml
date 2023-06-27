@@ -1,0 +1,12 @@
+mqtt_info:
+  broker:
+    ip: 10.10.10.151
+    port: 1883
+    topics:
+      - name: 'wash_samos_1/ampere'
+        description: 'topic for 1 wash machine'
+      - name: 'wash_samos_2/ampere'
+        description: 'topic for 2 wash machine'
+web_info:
+  flask:
+    port: 8000

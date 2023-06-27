@@ -1,89 +1,35 @@
 import flask
 from flask_mqtt import Mqtt
 from flask import Flask, render_template, request, jsonify
-import paho.mqtt.client as mqtt
-import time
+from paho.mqtt.client import Client as MQTTClient
 from datetime import datetime
-import requests as requests
-from flaskr.engine.controller import start_wash1_validator, start_wash2_validator
+from flaskr.engine.controller import process_wash_topic
+from flaskr.utils.configurator import read_config
 
-app = flask.Flask(__name__, static_url_path='', static_folder='flaskr\\static',
-                  template_folder='flaskr\\templates')
-app.config['MQTT_BROKER_URL'] = '10.10.10.151'
-app.config['MQTT_BROKER_PORT'] = 1883
+configuration = read_config('config.yaml')
+wash_state = {}
+wash_timestamp_state = {}
+
+app = Flask(__name__, static_url_path='', static_folder='flaskr/static', template_folder='flaskr/templates')
+app.config['MQTT_BROKER_URL'] = configuration['mqtt_info']['broker']['ip']
+app.config['MQTT_BROKER_PORT'] = configuration['mqtt_info']['broker']['port']
+print('ADADADA I BEGAN')
 mqtt = Mqtt(app)
-
-
-wash_state_1 = False
-wash_state_2 = False
-
-static_counter_start_wash_1 = 0
-static_counter_complete_wash_1 = 0
-static_counter_complete_wash_1_b = 0
-flag1 = 0
-wash_1_timestamp_state = None
-
-static_counter_start_wash_2 = 0
-static_counter_complete_wash_2 = 0
-static_counter_complete_wash_2_b = 0
-flag2 = 0
-wash_2_timestamp_state = None
-
+mqtt_topics = configuration['mqtt_info']['topics']
+topic_names = [topic['name'] for topic in mqtt_topics]
+mqtt_client = MQTTClient()
+mqtt_client.connect(app.config['MQTT_BROKER_URL'], app.config['MQTT_BROKER_PORT'])
 
 @mqtt.on_connect()
 def handle_connect(client, userdata, flags, rc):
-    client.subscribe([("wash_samos_1/ampere", 0), ("wash_samos_2/ampere", 0)])
-
+    client.subscribe([(topic_names[0], 0), (topic_names[1], 0)])
 
 @mqtt.on_message()
 def handle_mqtt_message(client, userdata, message):
-
-    global wash_state_1, static_counter_start_wash_1, static_counter_complete_wash_1, \
-        flag1, static_counter_complete_wash_1_b, wash_1_timestamp_state
-    global wash_state_2, static_counter_start_wash_2, static_counter_complete_wash_2, \
-        static_counter_complete_wash_2_b, flag2, wash_2_timestamp_state
-
     topic = message.topic
     payload = message.payload.decode()
     val = float(payload)
-
-    if topic == 'wash_samos_1/ampere':
-        if 0.16 >= val > 0.01:
-            if flag1 == 1:
-                if static_counter_complete_wash_1 == 12:
-                    flag1 = 0
-                    static_counter_complete_wash_1 = 0
-                    wash_state_1 = False
-                else:
-                    static_counter_complete_wash_1 = static_counter_complete_wash_1 + 1
-        if val >= 0.17:
-            if flag1 == 0:
-                if static_counter_complete_wash_1_b == 5:
-                    flag1 = 1
-                    wash_state_1 = True
-                    static_counter_complete_wash_1_b = 0
-                    wash_1_timestamp_state = datetime.now().strftime("%H:%M:%S")
-                else:
-                    static_counter_complete_wash_1_b = static_counter_complete_wash_1_b + 1
-    elif topic == 'wash_samos_2/ampere':
-        if 0.16 >= val > 0.01:
-            if flag2 == 1:
-                if static_counter_complete_wash_2 == 12:
-                    flag2 = 0
-                    static_counter_complete_wash_2 = 0
-                    wash_state_2 = False
-                else:
-                    static_counter_complete_wash_2 = static_counter_complete_wash_2 + 1
-        if val >= 0.17:
-            if flag2 == 0:
-                if static_counter_complete_wash_2_b == 5:
-                    flag2 = 1
-                    wash_state_2 = True
-                    static_counter_complete_wash_2_b = 0
-                    wash_2_timestamp_state = datetime.now().strftime("%H:%M:%S")
-                else:
-                    static_counter_complete_wash_2_b = static_counter_complete_wash_2_b + 1
-
+    process_wash_topic(topic, payload, wash_state, wash_timestamp_state)
 
 @app.route('/email_action', methods=["GET", "POST"])
 def email_call():
@@ -94,19 +40,20 @@ def email_call():
         # render same page with message that email was sent!
     return render_template('index.html', condition_met1=False)
 
-
 @app.route('/check_status', methods=['GET'])
 def check_wash_status():
-    global wash_state_1, wash_1_timestamp_state
-    global wash_state_2, wash_2_timestamp_state
-    return jsonify(state1=wash_state_1, state2=wash_state_2, time1=wash_1_timestamp_state, time2=wash_2_timestamp_state)
-
+    wash_statuses = {}
+    for topic in mqtt_topics:
+        topic_name = topic['name']
+        wash_statuses[topic_name] = {
+            'state': wash_state.get(topic_name, False),
+            'time': wash_timestamp_state.get(topic_name, None)
+        }
+    return jsonify(wash_statuses)
 
 @app.route('/', methods=['GET'])
 def init():
     return render_template('index.html')
 
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80, debug=True)
+    app.run(host='0.0.0.0', port=configuration['web_info']['flask']['port'], debug=True)
