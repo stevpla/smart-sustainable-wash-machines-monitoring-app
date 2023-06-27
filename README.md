@@ -15,7 +15,7 @@ This project, combines concepts and technologies from physical layer such ar esp
 
 
 ## Application Architecture
-![Image Description](wash_machines_monitoring_service/flaskr/static/img/image_filename.png)
+![Image Description](wash_machines_monitoring_service/flaskr/static/img/mqtt-protocol3.png.png)
 
 ### 1-Tier (Data Producer)
 
