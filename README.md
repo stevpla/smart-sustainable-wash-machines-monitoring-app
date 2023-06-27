@@ -15,7 +15,7 @@ This project, combines concepts and technologies from physical layer such ar esp
 
 
 ## Application Architecture
-![Image Description](images/image_filename.png)
+![Image Description](images/mqtt-protocol3.png)
 
 ### 1-Tier (Data Producer)
 
