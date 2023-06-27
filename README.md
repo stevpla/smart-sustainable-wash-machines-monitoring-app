@@ -94,11 +94,11 @@ karma test
 
 
 ## People
-- Nikos Rekkas, Vasilis Kartitzoglou and Stefanos Plastras, alumni from University of the Aegean, were involved in the design, implementaion, testing and installation of this project.
+Nikos Rekkas, Vasilis Kartitzoglou and Stefanos Plastras, alumni from University of the Aegean, were involved in the design, implementaion, testing and installation of this project.
 
 ### Nikos Rekkas
 - Currently, he is working as software engineer in ABS COMPANY. He holds a MEng from the Department of Information and Communication Systems Engineering of University of the Aegean.  
-Email: nikos.rekkas@gmail.com  
+Email: nrekkas@gmail.com  
 Github: [nikosrk](https://github.com/nikosrk)  
 
 ### Stefanos Plastras
