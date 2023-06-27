@@ -33,7 +33,7 @@ This project, combines concepts and technologies from physical layer such ar esp
 
 ## Before Installation
 *Please, before install all the necesseray libs and scripts, make sure that you have
-the right hardware connected and taht you are ready to start!*
+the right hardware connected and that you are ready to start!*
 
 - You better check these:
 
