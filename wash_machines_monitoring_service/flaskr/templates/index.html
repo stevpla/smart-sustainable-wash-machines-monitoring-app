@@ -41,7 +41,6 @@
   color: blue;
 }
   </style>
-
 </head>
 <body>
 
@@ -49,7 +48,7 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
 
-      <h1 class="logo"><img src="img/logo.jpg" style="width:50px;"><a href="index.html">University of the Aegean</a></h1>
+      <h1 class="logo"><img src="img/logo.jpg" style="width:50px;"><a href="/">University of the Aegean</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -139,41 +138,30 @@
             </li>
 
             <li data-aos="fade-up" data-aos-delay="100">
-              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-2" class="collapsed">Y1? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-2" class="collapsed">Χρειάζεται να υπάρχει σύνδεση στο διαδίκτυο για να λειτουργήσει η εφαρμογή ; <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
               <div id="faq-list-2" class="collapse" data-bs-parent=".faq-list">
                 <p>
-                  X1.
+                  Η εφαρμογή μπορεί να λειτουργήσει κανονικά ακόμη και αν δεν έχει σύνδεση στο Internet.
+                  Επειδή όλα τα δεδομένα δημιουργούνται και στέλνονται σε Raspberry Pi που είναι στο τοπικό
+                  δίκτυο της Εστίας, δεν απαιτείται το Raspberry Pi και το ESP32-MCU να είναι συνδεδεμένα
+                  στο Internet.
+                  Το μόνο που χρειάζεται Internet, είναι η αποστολή email και η παραπομπή στα emails των
+                  δημιουργών.
                 </p>
               </div>
             </li>
 
             <li data-aos="fade-up" data-aos-delay="200">
-              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-3" class="collapsed">Y2? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-3" class="collapsed">Μετά από κάποια πτώση ρεύματος, χρειάζεται
+              κάποια ρύθμιση ώστε η εφαρμογή να τρέξει εκ νέου ή γίνεται αυτόματα ;<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
               <div id="faq-list-3" class="collapse" data-bs-parent=".faq-list">
                 <p>
-                  X2
+                  Η εφαρμογή είναι ρυθμισμένη με κατάλληλες εντολές ώστε αν οι συσκευές (ESP32, Raspberry Pi)
+                  χάσουν προσωρινά τη τροφοδοσία τους (πχ, πτώση ρεύματος), όταν επανέλθουν να εκτελέσουν κανονικά
+                  την εφαρμογή αυτόματα.
                 </p>
               </div>
             </li>
-
-            <li data-aos="fade-up" data-aos-delay="300">
-              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-4" class="collapsed">Y3? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-              <div id="faq-list-4" class="collapse" data-bs-parent=".faq-list">
-                <p>
-                  X3
-                </p>
-              </div>
-            </li>
-
-            <li data-aos="fade-up" data-aos-delay="400">
-              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-5" class="collapsed">Y4 <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-              <div id="faq-list-5" class="collapse" data-bs-parent=".faq-list">
-                <p>
-                    X4.
-                </p>
-              </div>
-            </li>
-
           </ul>
         </div>
 
@@ -196,7 +184,7 @@
               <div class="email">
                 <i class="bi bi-envelope"></i>
                 <h4>Email:</h4>
-                <p><a href = "mailto: nikosrekkas@gmail.com">nikosrekkas@gmail.com</a></p>
+                <p><a href = "mailto: nrekkas@gmail.com">nrekkas@gmail.com</a></p>
                 <p><a href = "mailto: s.plastras@gmail.com">s.plastras@gmail.com</a></p>
               </div>
             </div>
@@ -217,18 +205,21 @@
                 <div class="form-group col-12">
                   <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
                 </div>
-                <div class="my-3 col-12">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
-                </div>
                 <div class="text-center col-12"><button type="submit">Send Message</button></div>
               </div>
             </form>
+
+            <div>
+              {% if email_status == 1 %}
+                <p style="color: green; width: 100%;"> <strong>Message has been sent!!</strong></p>
+              {% endif %}
+              {% if email_status == -1 %}
+                <p style="color: red; width: 100%;"> <strong>An error occurred ... Try again later.</strong></p>
+              {% endif %}
+            </div>
+
           </div>
-
         </div>
-
       </div>
     </section><!-- End Contact Section -->
 
@@ -267,14 +258,8 @@
           <!-- You can delete the links only if you purchased the pro version. -->
           <!-- Licensing information: https://bootstrapmade.com/license/ -->
           <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/onepage-multipurpose-bootstrap-template/ -->
-          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+
         </div>
-      </div>
-      <div class="social-links text-center text-md-right pt-3 pt-md-0">
-        <a href="https://gr.linkedin.com/in/stefanos-plastras-2b386b229?original_referer=https%3A%2F%2Fwww.google.gr%2F" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-        <p>Stefanos Plastras</p>
-        <a href="https://gr.linkedin.com/in/stefanos-plastras-2b386b229?original_referer=https%3A%2F%2Fwww.google.gr%2F" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-        <p>Nikos Rekkas</p>
       </div>
     </div>
   </footer><!-- End Footer -->
@@ -290,7 +275,6 @@
   <script src="/vendor/glightbox/js/glightbox.min.js"></script>
   <script src="/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="/vendor/php-email-form/validate.js"></script>
 
   <!-- Template Main JS File -->
   <script src="/js/main.js"></script>

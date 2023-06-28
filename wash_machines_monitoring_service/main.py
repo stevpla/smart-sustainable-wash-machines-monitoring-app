@@ -5,6 +5,7 @@ from paho.mqtt.client import Client as MQTTClient
 from datetime import datetime
 from flaskr.engine.controller import process_wash_topic
 from flaskr.utils.configurator import read_config
+from flaskr.utils.email_sender import send_email
 
 configuration = read_config('config.yaml')
 wash_state = {}
@@ -20,9 +21,11 @@ topic_names = [topic['name'] for topic in mqtt_topics]
 mqtt_client = MQTTClient()
 mqtt_client.connect(app.config['MQTT_BROKER_URL'], app.config['MQTT_BROKER_PORT'])
 
+
 @mqtt.on_connect()
 def handle_connect(client, userdata, flags, rc):
     client.subscribe([(topic_names[0], 0), (topic_names[1], 0)])
+
 
 @mqtt.on_message()
 def handle_mqtt_message(client, userdata, message):
@@ -31,14 +34,14 @@ def handle_mqtt_message(client, userdata, message):
     val = float(payload)
     process_wash_topic(topic, payload, wash_state, wash_timestamp_state)
 
-@app.route('/email_action', methods=["GET", "POST"])
+
+@app.route('/email_action', methods=["POST"])
 def email_call():
     if request.method == "POST":
-        print(request.values)
-        # SEND MESSAGE TO EMAIL s.plastras@gmail.com and nikosrekkas@gmail.com
-        # FILL CODE PYTHON HERE
-        # render same page with message that email was sent!
-    return render_template('index.html', condition_met1=False)
+        result = send_email(request.form.get('email'), request.form.get('name'),
+                                request.form.get('subject'), request.form.get('message'))
+        return render_template('index.html', email_status=result)
+
 
 @app.route('/check_status', methods=['GET'])
 def check_wash_status():
@@ -51,9 +54,11 @@ def check_wash_status():
         }
     return jsonify(wash_statuses)
 
+
 @app.route('/', methods=['GET'])
 def init():
     return render_template('index.html')
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=configuration['web_info']['flask']['port'], debug=True)
