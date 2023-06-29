@@ -15,21 +15,24 @@ This project, combines concepts and technologies from physical layer such ar esp
 
 
 ## Application Architecture
-![Image Description](wash_machines_monitoring_service/flaskr/static/img/mqtt-protocol3.png)
+![Image Description](wash_machines_monitoring_service/flaskr/static/img/arch1.png)
 
 ### 1-Tier (Data Producer)
+ESP32-MCU act as a data producer. With the presence of the 030 A Current Sensors, it can sense in real-time the electric current from the 2 wash machines. Then, with the MQTT protocol, it sends this information to the MQTT Broker (raspberry Pi 3) to the specific topics.
 
 ### 2-Tier (Broker)
+Raspberry Pi 3 act as a MQTT Broker. It contains the 2 topics. Mosquitto service is active here.
 
 ### 3-Tier (Data Consumer)
+In the same physical Raspberry Pi 3 there is a Python service runss which act as a MQTT Subscriber to these topics in order to implement a control logic regarding the wash machines states.
 
 ### 4-Tier (Web Service)
+In the same Raspberry, the Python service also has double role, thus offering a web service (Flask) accessible via the users browser.
 
 ### Front-End (Client-Side)
+The Front-End running in the browser side, implements also the control logic, by subscibing to the MQTT topics acting also as a MQTT consumer. Therefore, Back-End is not actually needed except a single GET API in the context of page refreshing.
 
-## Installation
-
-
+# App Execution
 
 ## Before Installation
 *Please, before install all the necesseray libs and scripts, make sure that you have
@@ -62,42 +65,39 @@ Want to contribute? Great!
 *At the end of these scripts, the main.py will be executed!*
 
 ### Phase C: Make Python Service a system service
-    1.
-    2.
+    1. cd /etc/systemd/system/
+    2. sudo nano wash_app.service
 
 
-
-First Tab:
-
-```sh
-node app
-```
-
-Second Tab:
+Using nano,
 
 ```sh
-gulp watch
+[Unit]
+Description=My Python Project
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 /path/to/main.py
+WorkingDirectory=/path/to/project_directory
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
 ```
 
+Make sure to replace /path/to/main.py with the actual path to your main.py file and /path/to/project_directory with the actual path to your project directory. Save the file and exit the nano editor (Ctrl+O, Enter, Ctrl+X).
 
-```sh
-cd dillinger
-npm i
-node app
-```
 
-(optional) Third:
-
-```sh
-karma test
-```
+    3. sudo systemctl daemon-reload
+    4. sudo systemctl enable wash_app
+    5. sudo systemctl start wash_app
 
 
 ## People
 Nikos Rekkas, Vasilis Kartitzoglou and Stefanos Plastras, alumni from University of the Aegean, were involved in the design, implementaion, testing and installation of this project.
 
 ### Nikos Rekkas
-- Currently, he is working as software engineer in ABS COMPANY. He holds a MEng from the Department of Information and Communication Systems Engineering of University of the Aegean.  
+- Currently, he is working as software engineer in the private sector. He holds a MEng from the Department of Information and Communication Systems Engineering of University of the Aegean.  
 Email: nrekkas@gmail.com  
 Github: [nikosrk](https://github.com/nikosrk)  
 
