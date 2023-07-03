@@ -10,3 +10,8 @@ mqtt_info:
 web_info:
   flask:
     port: 8000
+email:
+  sender:
+    email_s: 'samoswachsystem@gmail.com'
+    email_s_pass: 'qymmmxeqchdhykku'
+    description_s: 'Enable Google Email App Security Pin first'
