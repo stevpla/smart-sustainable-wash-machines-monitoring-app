@@ -3,10 +3,10 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 
-def send_email(recipient_email, name, subject, message):
+def send_email(recipient_email, name, subject, message, email_s, email_s_pass):
     flag = 0
-    sender_email = 'samoswachsystem@gmail.com'
-    sender_password = 'qymmmxeqchdhykku'
+    sender_email = email_s
+    sender_password = email_s_pass
     # Create a MIME multipart message
     msg = MIMEMultipart()
     msg['From'] = sender_email
