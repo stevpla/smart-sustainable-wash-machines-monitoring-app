@@ -38,7 +38,9 @@ def handle_mqtt_message(client, userdata, message):
 def email_call():
     if request.method == "POST":
         result = send_email(request.form.get('email'), request.form.get('name'),
-                                request.form.get('subject'), request.form.get('message'))
+                                request.form.get('subject'), request.form.get('message'),
+                            configuration['email']['sender']['email_s'],
+                            configuration['email']['sender']['email_s_pass'])
         return render_template('index.html', email_status=result)
 
 
