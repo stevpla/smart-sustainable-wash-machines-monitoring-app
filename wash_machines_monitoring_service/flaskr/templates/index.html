@@ -80,8 +80,8 @@
           <div class="icon-box">
             <div class=""><i class="ri-stack-line"></i></div>
              <img src="img/wash_icon.png" alt="Wash 1" style="width:200px;height:200px;">
-             <img src="img/wash_circle.png" class="inner-icon"  style="position: absolute; top: 126px; right: 83px; width:95px; height:95px; animation: spin 4s infinite linear;">
-            <p class="description"><br>Πλυντήριο Νο. 1</p>
+             <img src="img/wash_circle.png" class="inner-icon" id="wash-spinner" style="position: absolute; top: 126px; right: 83px; width:95px; height:95px;">
+              <p class="description"><br>Πλυντήριο Νο. 1</p>
             <div id="LabelFrame1" class="label-frame">
               <label class="wash-message-label">FREE</label>
             </div>
@@ -93,7 +93,7 @@
           <div class="icon-box">
             <div class=""><i class="ri-stack-line"></i></div>
              <img src="img/wash_icon.png" alt="Wash 1" style="width:200px;height:200px;">
-             <img src="img/wash_circle.png" class="inner-icon"  style="position: absolute; top: 126px; right: 83px; width:95px; height:95px; animation: spin 4s infinite linear;">
+              <img src="img/wash_circle.png" class="inner-icon" id="wash-spinner2" style="position: absolute; top: 126px; right: 83px; width:95px; height:95px;">
             <p class="description"><br>Πλυντήριο Νο. 2</p>
             <div id="LabelFrame2" class="label-frame">
               <label class="wash-message-label">FREE</label>
@@ -376,6 +376,7 @@
                 const time2 = data.time2;
                 if (state1) {
                   document.getElementById("LabelFrame1").style.display = "none";
+                  document.getElementById('wash-spinner').style.animation = 'spin 4s infinite linear';
                   flag1 = 1;
                   timeDifference = calculateTimeDifference(time1);
                   //document.getElementById("timer1").textContent = timeDifference;
@@ -384,6 +385,7 @@
                 }
                 if (state2) {
                   document.getElementById("LabelFrame2").style.display = "none";
+                    document.getElementById('wash-spinner2').style.animation = 'spin 4s infinite linear';
                   flag2 = 1;
                   timeDifference = calculateTimeDifference(time2);
                   //document.getElementById("timer2").textContent = timeDifference;
@@ -422,6 +424,7 @@
                             static_counter_complete_wash_1 = 0;
                             document.getElementById("timer1").style.display = "none";
                             document.getElementById("LabelFrame1").style.display = "block";
+                            document.getElementById('wash-spinner').style.animation = 'none';
                         }else {
                             static_counter_complete_wash_1 += 1;
                         }
@@ -451,6 +454,7 @@
                             static_counter_complete_wash_2 = 0;
                             document.getElementById("timer2").style.display = "none";
                             document.getElementById("LabelFrame2").style.display = "block";
+                            document.getElementById('wash-spinner2').style.animation = 'none';
 
                         }else {
                             static_counter_complete_wash_2 += 1;
