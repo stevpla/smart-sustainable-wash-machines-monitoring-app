@@ -14,7 +14,6 @@ wash_timestamp_state = {}
 app = Flask(__name__, static_url_path='', static_folder='flaskr/static', template_folder='flaskr/templates')
 app.config['MQTT_BROKER_URL'] = configuration['mqtt_info']['broker']['ip']
 app.config['MQTT_BROKER_PORT'] = configuration['mqtt_info']['broker']['port']
-print('ADADADA I BEGAN')
 mqtt = Mqtt(app)
 mqtt_topics = configuration['mqtt_info']['topics']
 topic_names = [topic['name'] for topic in mqtt_topics]
