@@ -63,28 +63,32 @@ the right hardware connected and that you are ready to start!*
 Guidelines in case somebody wants to create this project and develop it in a real environment.
 Want to contribute? Great!
 ### Phase A: Prepare App Environment
+```sh
     1. Flash cpp firmware code to esp32 board
     2. Install mosquitto lib to Raspberry Pi 3 Model B+
         - Rasbian:  $ sudo apt-get install mosquitto
     3. Make mosquitto service to autorestart on every system boot (eg, power failure).
         - Rasbian:  $ sudo systemctl enable --now mosquitto.service
-      
- 
+```
 
 ### Phase B: Install Python Libraries - Execute Python App
     There are 2 scripts for windows (.bat) and Linux (.sh) respectively, that offers installation automation. Only thing that is needed is running one of these scripts. Navigate to python project and: 
-    1. ./setup_python_project_linux.sh (first, run this: $ chmod +x setup_python_project_linux.sh)
-    2. ./setup_python_project_linux.bat
+```sh
+1. ./setup_python_project_linux.sh (first, run this: $ chmod +x setup_python_project_linux.sh)
+2. ./setup_python_project_linux.bat
+```
 *At the end of these scripts, the main.py will be executed!*
 
 ### Phase C: Make Python Service a system service
+```sh
     1. cd /etc/systemd/system/
     2. sudo nano wash_app.service
+```
 
 
 Using nano,
 
-```sh
+```python
 [Unit]
 Description=My Python Project
 After=network.target
@@ -100,11 +104,11 @@ WantedBy=multi-user.target
 
 Make sure to replace /path/to/main.py with the actual path to your main.py file and /path/to/project_directory with the actual path to your project directory. Save the file and exit the nano editor (Ctrl+O, Enter, Ctrl+X).
 
-
+```sh
     3. sudo systemctl daemon-reload
     4. sudo systemctl enable wash_app
     5. sudo systemctl start wash_app
-
+```
 
 ## People
 Nikos Rekkas, Vasilis Kartitzoglou and Stefanos Plastras, alumni from University of the Aegean, were involved in the design, implementaion, testing and installation of this project.
