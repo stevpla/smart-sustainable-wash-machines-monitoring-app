@@ -3,11 +3,24 @@
 
 [![N|Solid](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdtwNII_IsIkRnxT5jhpb_i84wVEY2eBCTrNaELBnSBjM6RRlmIdlW5IerHhLCxU9Jdes&usqp=CAU)](https://www.aegean.gr/)
 
-
 Wash Machines Monitoring Service is an end-to-end full stack project providing web interface for wash machines live state monitoring for the optimal students time management. This project have been implemented by alumni and students of University of the Aegean to the students of this university and it is placed in the Samos island, in the students reside building.
+
+## All-in-One
+Our concept utilizes an eco-friendly approach due to the fact that esp32 is an ultra-low IoT power device opening the horizon for sustainability and low-cost solutions.
+- Eco-friendly approach
+- <img src="https://cdn-icons-png.flaticon.com/512/3412/3412024.png" alt="Icon" width="38">        Promoting sustainability both in terms of technological equipment as well as in wash machines longer lifecycle through predictive analysis
+- <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-dAmrgSb6vVoVB5cOkw3xCamnZhhOHnCsb9RUqfoeqIusSpZ1vUM9A02MSGlQnA-3AD4&usqp=CAU" alt="Icon" width="43">        Open-source project for everyone! - **Always there is space for improvement!**
+- Low-cost solution
+- Scalable - **With just more Ampere Sensors, you have the desired results**
+- Upgradable - **Any part can be upgraded**
+- Agnostic-vendor - **It can play in any environment and in any wash machine vendor**
+
 
 ## Hardware, Software and Protocols
 This project, combines concepts and technologies from physical layer such ar esp32, software layers such as Python, CSS and middle layer such as mosquitto protocol. Hardware, software and protocols are merged up together to create a web service in which the live state of the wach machines is being displayed. It is a 4-tier architecture.Specifically, our project includes these technologies per layer:
+
+[![My Skills](https://skillicons.dev/icons?i=arduino,cpp,raspberrypi,linux,py,flask,js,html,github&perline=9)](https://skillicons.dev)
+
 - Hardware: ESP 32 board, Raspberry Pi 3 Model B+, Ampere sensors x 2
 - Software: Python 3.10, CSS, HTML, JavaScript, CPP firmware
 - Middleware: Mosquito Broker, MQTT
