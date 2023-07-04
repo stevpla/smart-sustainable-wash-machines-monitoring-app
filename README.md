@@ -1,4 +1,4 @@
-# Wash Machines Monitoring Service
+# Smart and Sustainable Wash Machines Monitoring App
 **_A project from students to students_**
 
 [![N|Solid](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdtwNII_IsIkRnxT5jhpb_i84wVEY2eBCTrNaELBnSBjM6RRlmIdlW5IerHhLCxU9Jdes&usqp=CAU)](https://www.aegean.gr/)
