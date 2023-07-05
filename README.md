@@ -21,7 +21,7 @@ This project, combines concepts and technologies from physical layer such ar esp
 
 [![My Skills](https://skillicons.dev/icons?i=arduino,cpp,raspberrypi,linux,py,flask,js,html,github&perline=9)](https://skillicons.dev)
 
-- Hardware: ESP 32 board, Raspberry Pi 3 Model B+, Ampere sensors x 2
+- Hardware: ESP 32 board, Raspberry Pi 3 Model B+, Current sensors x 2
 - Software: Python 3.10, CSS, HTML, JavaScript, CPP firmware
 - Middleware: Mosquito Broker, MQTT
 - Web Layer: Flask-MQTT
