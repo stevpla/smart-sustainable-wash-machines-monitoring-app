@@ -45,6 +45,11 @@ In the same Raspberry, the Python service also has double role, thus offering a 
 ### Front-End (Client-Side)
 The Front-End running in the browser side, implements also the control logic, by subscibing to the MQTT topics acting also as a MQTT consumer. Therefore, Back-End is not actually needed except a single GET API in the context of page refreshing.
 
+## Function (time) = Ampere
+In the context of a single cycle wash, ampere values follow this polynomial function
+
+![Image Description](wash_machines_monitoring_service/flaskr/static/img/single_wash.png)
+
 # App Execution
 
 ## Before Installation
