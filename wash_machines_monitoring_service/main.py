@@ -1,16 +1,26 @@
 import flask
 from flask_mqtt import Mqtt
 from flask import Flask, render_template, request, jsonify
-from paho.mqtt.client import Client as MQTTClient
+from paho.mqt.client import Client as MQTTClient
 from datetime import datetime
 from flaskr.engine.controller import process_wash_topic
 from flaskr.utils.configurator import read_config
 from flaskr.utils.email_sender import send_email
 
 configuration = read_config('config.yaml')
-wash_state = {}
-start_wash_timestamp_state = {}
-end_wash_timestamp_state = {}
+
+static_counter_complete_wash_1 = 0
+static_counter_complete_wash_1_b = 0
+flag1 = None
+static_counter_complete_wash_2 = 0
+static_counter_complete_wash_2_b = 0
+flag2 = None
+wash_state1 = None
+wash_state2 = None
+start_wash_timestamp_state1 = None
+end_wash_timestamp_state1 = None
+start_wash_timestamp_state2 = None
+end_wash_timestamp_state3 = None
 
 app = Flask(__name__, static_url_path='', static_folder='flaskr/static', template_folder='flaskr/templates')
 app.config['MQTT_BROKER_URL'] = configuration['mqtt_info']['broker']['ip']
@@ -32,9 +42,15 @@ def handle_mqtt_message(client, userdata, message):
     topic = message.topic
     payload = message.payload.decode()
     val = float(payload)
-    process_wash_topic(topic, payload, wash_state,
-                       start_wash_timestamp_state,
-                       end_wash_timestamp_state)
+    global static_counter_complete_wash_1, static_counter_complete_wash_1_b,\
+        flag1, static_counter_complete_wash_2, static_counter_complete_wash_2_b, \
+    flag2, wash_state1, wash_state2, start_wash_timestamp_state1,\
+        end_wash_timestamp_state1, start_wash_timestamp_state2,\
+        end_wash_timestamp_state3
+    process_wash_topic(topic, topic_names[0], topic_names[1], payload, static_counter_complete_wash_1, static_counter_complete_wash_1_b,
+                       flag1, static_counter_complete_wash_2, static_counter_complete_wash_2_b,
+                       flag2, wash_state1, wash_state2, start_wash_timestamp_state1,
+                       end_wash_timestamp_state1)
 
 
 @app.route('/email_action', methods=["POST"])
@@ -49,14 +65,10 @@ def email_call():
 
 @app.route('/check_status', methods=['GET'])
 def check_wash_status():
-    wash_statuses = {}
-    for topic in mqtt_topics:
-        topic_name = topic['name']
-        wash_statuses[topic_name] = {
-            'state': wash_state.get(topic_name, False),
-            'time': wash_timestamp_state.get(topic_name, None)
-        }
-    return jsonify(wash_statuses)
+    global wash_state1, wash_state2, \
+        start_wash_timestamp_state1, start_wash_timestamp_state2
+    return jsonify(wash_state1, wash_state2, start_wash_timestamp_state1,
+                   start_wash_timestamp_state2)
 
 
 @app.route('/', methods=['GET'])
