@@ -61,7 +61,7 @@ the right hardware connected and that you are ready to start!*
 | Tools | Description |
 | ---- | -------------------------------------------|
 | [ESP32 MCU](http://esp32.net/) | Cpp firmware execution, data producing|
-| [Raspberry Pi 3 Model B+](https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/) | Running Rasbian OS, mosquitto broker service, Python App execution|
+| [Raspberry Pi 3 Model B+](https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/) | Running Rasbian OS, mosquitto broker service, MongoDB, Python App execution|
 | [SCT-013-030 Non-invasive AC Current Sensor](https://www.cableworks.gr/ilektronika/arduino-and-microcontrollers/mcu-and-components/current-voltage/30a-sct-013-030-non-invasive-ac-current-sensor-for-arduino//) | Sensing Wach machines electric current|
     
 ## Application Installation & Execution
@@ -69,10 +69,15 @@ Guidelines in case somebody wants to create this project and develop it in a rea
 Want to contribute? Great!
 ### Phase A: Prepare App Environment
 ```sh
-    1. Flash cpp firmware code to esp32 board
-    2. Install mosquitto lib to Raspberry Pi 3 Model B+
-        - Rasbian:  $ sudo apt-get install mosquitto
-    3. Make mosquitto service to autorestart on every system boot (eg, power failure).
+    [ESP32]
+    1. Put the wash machines electric cables into AC Sensors
+    2. Power on the ESP32
+    3. Flash CPP firmware code to ESP32 board
+    --------------------------------------
+    [RASBPERRY PI]
+    1. Power on Pi and connect to it (eg, SSH) 
+    2. Install mosquitto lib, MongoDB
+    3. Make mosquitto service to autorestart on every system boot (eg, in case of power failure).
         - Rasbian:  $ sudo systemctl enable --now mosquitto.service
 ```
 
