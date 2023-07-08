@@ -9,7 +9,8 @@ from flaskr.utils.email_sender import send_email
 
 configuration = read_config('config.yaml')
 wash_state = {}
-wash_timestamp_state = {}
+start_wash_timestamp_state = {}
+end_wash_timestamp_state = {}
 
 app = Flask(__name__, static_url_path='', static_folder='flaskr/static', template_folder='flaskr/templates')
 app.config['MQTT_BROKER_URL'] = configuration['mqtt_info']['broker']['ip']
