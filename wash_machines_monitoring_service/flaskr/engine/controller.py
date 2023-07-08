@@ -1,6 +1,10 @@
 from datetime import datetime
 
+
+static_counter_complete_wash = -10
+
 def process_wash_topic(topic, payload, wash_state, wash_timestamp_state):
+    global static_counter_complete_wash
     topic_name = topic['name']
     val = float(payload)
 
