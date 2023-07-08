@@ -32,7 +32,9 @@ def handle_mqtt_message(client, userdata, message):
     topic = message.topic
     payload = message.payload.decode()
     val = float(payload)
-    process_wash_topic(topic, payload, wash_state, wash_timestamp_state)
+    process_wash_topic(topic, payload, wash_state,
+                       start_wash_timestamp_state,
+                       end_wash_timestamp_state)
 
 
 @app.route('/email_action', methods=["POST"])

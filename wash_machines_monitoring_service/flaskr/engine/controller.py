@@ -30,7 +30,7 @@ def process_wash_topic(topic, payload, wash_state, start_wash_timestamp_state,
         if not wash_state[topic_name]:
             if static_counter_complete_wash == 5:
                 wash_state[topic_name] = True
-                static_counter_complete_wash_b = 0
+                static_counter_complete_wash = 0
                 start_wash_timestamp_state[topic_name] = datetime.now().strftime("%H:%M:%S")
             else:
                 static_counter_complete_wash += 1
