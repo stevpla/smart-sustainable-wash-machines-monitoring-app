@@ -414,7 +414,8 @@ function calculateTimeDifference(time) {
                   timeDifference = calculateTimeDifference(time1);
                   //document.getElementById("timer1").textContent = timeDifference;
                   document.getElementById("timer1").style.display = "block";
-                  startCountUpTimer("timer1", timeDifference);
+                  console.log(timeDifference);
+                  startCountUpTimer1(timeDifference);
                 }
                 if (state2) {
                   document.getElementById("LabelFrame2").style.display = "none";
@@ -423,7 +424,7 @@ function calculateTimeDifference(time) {
                   timeDifference = calculateTimeDifference(time2);
                   //document.getElementById("timer2").textContent = timeDifference;
                   document.getElementById("timer2").style.display = "block";
-                  startCountUpTimer("timer2", timeDifference);
+                  startCountUpTimer2(timeDifference);
                 }
               })
               .catch(error => {
@@ -471,6 +472,7 @@ function calculateTimeDifference(time) {
                       static_counter_complete_wash_1_b = 0;
                       document.getElementById("LabelFrame1").style.display = "none";
                       document.getElementById("timer1").style.display = "block";
+                      document.getElementById('wash-spinner').style.animation = 'spin 4s infinite linear';
                       startCountUpTimer1('00:00:00');
                       showPopup('popup1', 'wash_started_sound');
                     } else {
@@ -503,6 +505,7 @@ function calculateTimeDifference(time) {
                       static_counter_complete_wash_2_b = 0;
                       document.getElementById("LabelFrame2").style.display = "none";
                       document.getElementById("timer2").style.display = "block";
+                      document.getElementById('wash-spinner2').style.animation = 'spin 4s infinite linear';
                       startCountUpTimer2('00:00:00');
                       showPopup('popup1', 'wash_started_sound');
                     } else {
